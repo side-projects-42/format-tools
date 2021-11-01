@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>index</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="internet-archive-blogs"><a href="http://blog.archive.org/" title="Internet Archive Blogs">Internet Archive Blogs</a></h1>
+<h2 id="a-blog-from-the-team-at-archive.org">A blog from the team at archive.org</h2>
+<p><a href="https://anniversary.archive.org" title="Celebrate our 25th anniversary with us."><img src="http://blog.archive.org/wp-content/uploads/2021/07/blog-header-02-lines-1.png" alt="Internet Archive Blogs" class="header-image" width="4108" height="864" /></a></p>
+<p>Menu</p>
+<p><a href="#content" class="assistive-text" title="Skip to content">Skip to content</a></p>
+<ul>
+<li><span id="menu-item-7707"><a href="https://blog.archive.org">Blog</a></span></li>
+<li><span id="menu-item-3417"><a href="http://blog.archive.org/category/announcements/">Announcements</a></span></li>
+<li><span id="menu-item-7359"><a href="https://anniversary.archive.org">25th Anniversary</a></span></li>
+<li><span id="menu-item-3422"><a href="https://archive.org">archive.org</a></span></li>
+<li><span id="menu-item-3421"><a href="http://blog.archive.org/about/">About</a></span></li>
+<li><span id="menu-item-15173"><a href="http://blog.archive.org/category/event/">Events</a></span></li>
+<li><span id="menu-item-8100"><a href="http://blog.archive.org/developers/">Developers</a></span></li>
+<li><span id="menu-item-15172"><a href="http://archive.org/donate">Donate</a></span></li>
+</ul>
+<h1 id="downloading-in-bulk-using-wget">Downloading in bulk using wget</h1>
+<p>Posted on <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/" title="1:28 am">April 26, 2012</a><span class="by-author"> by <span class="author vcard"><a href="http://blog.archive.org/author/internetarchive/" class="url fn n" title="View all posts by jeff kaplan">jeff kaplan</a></span></span></p>
+<p>If you’ve ever wanted to download files from many different archive.org items in an automated way, here is one method to do it.</p>
+<p><strong>____________________________________________________________</strong></p>
+<h3 id="heres-an-overview-of-what-well-do"><span style="color: #ff0000;"><strong>Here’s an overview of what we’ll do:</strong></span></h3>
+<ol type="1">
+<li>Confirm or install a terminal emulator and wget<br />
+</li>
+<li>Create a list of archive.org item identifiers<br />
+</li>
+<li>Craft a wget command to download files from those identifiers<br />
+</li>
+<li>Run the wget command.</li>
+</ol>
+<p><strong>____________________________________________________________</strong></p>
+<h3 id="requirements"><span style="color: #ff0000;"><strong>Requirements</strong></span></h3>
+<p>Required: a terminal emulator and wget installed on your computer. Below are instructions to determine if you already have these.<br />
+Recommended but not required: understanding of <a href="http://mally.stanford.edu/~sr/computing/basic-unix.html">basic unix commands</a> and <a href="http://blog.archive.org/2011/03/31/how-archive-org-items-are-structured/">archive.org items structure and terminology</a>.</p>
+<p><strong>____________________________________________________________</strong></p>
+<h3 id="section-1.-determine-if-you-have-a-terminal-emulator-and-wget.-if-not-they-need-to-be-installed-theyre-free"><strong><span style="color: #ff0000;">Section 1. Determine if you have a terminal emulator and wget.</span> <span style="color: #ff0000;"> If not, they need to be installed (they’re free)</span> </strong></h3>
+<p><strong>1. Check to see if you already have wget installed</strong><br />
+If you already have a terminal emulator such as Terminal (Mac) or Cygwin (Windows) you can check if you have wget also installed. If you do not have them both installed go to Section 2. Here’s how to check to see if you have wget using your terminal emulator:</p>
+<ol type="1">
+<li>Open Terminal (Mac) or Cygwin (Windows)<br />
+</li>
+<li>Type “which wget” after the $ sign<br />
+</li>
+<li>If you have wget the result should show what directory it’s in such as /usr/bin/wget. If you don’t have it there will be no results.</li>
+</ol>
+<p><strong>2</strong>. <strong>To install a terminal emulator and/or wget:</strong><br />
+<strong>Windows:</strong> To install a terminal emulator along with wget please read <a href="http://xahlee.info/mswin/installing_cygwin.html">Installing Cygwin Tutorial</a>. Be sure to choose the wget module option when prompted.</p>
+<p><strong>MacOSX:</strong> MacOSX comes with Terminal installed. You should find it in the Utilities folder (Applications &gt; Utilities &gt; Terminal). For wget, there are no official binaries of wget available for Mac OS X. Instead, you must either build wget from source code or download an unofficial binary created elsewhere. The following links may be helpful for getting a working copy of wget on Mac OSX.<br />
+<a href="http://www.techtach.org/wget-prebuilt-binary-for-mac-osx-lion">Prebuilt binary for Mac OSX Lion and Snow Leopard<br />
+</a><a href="http://www.statusq.org/archives/2008/07/30/1954/">wget for Mac OSX leopard</a></p>
+<p><strong>Building from source for MacOSX: Skip this step if you are able to install from the above links.</strong><br />
+To build from source, you must first <a href="http://www.techtach.org/wget-prebuilt-binary-for-mac-osx-lion">Install Xcode</a>. Once Xcode is installed there are many tutorials online to guide you through building wget from source. Such as, <a href="http://www.hacksparrow.com/how-to-install-wget-on-your-mac.html">How to install wget on your Mac</a>.</p>
+<h3 id="section"></h3>
+<p><strong>____________________________________________________________</strong></p>
+<h3 id="section-2.-now-you-can-use-wget-to-download-lots-of-files"><span style="color: #ff0000;"><strong>Section 2. Now you can use wget to download lots of files</strong></span></h3>
+<p>The method for using wget to download files is:</p>
+<ol type="1">
+<li>Generate a list of archive.org item identifiers (the tail end of the url for an archive.org item page) from which you wish to grab files.</li>
+<li>Create a folder (a directory) to hold the downloaded files</li>
+<li>Construct your wget command to retrieve the desired files</li>
+<li>Run the command and wait for it to finish</li>
+</ol>
+<p>****Step 1: Create a folder (directory) for your downloaded files<br />
+****1. Create a folder named “Files” on your computer Desktop. This is where the downloaded where files will go. Create it the usual way by using either command-shift-n (Mac) or control-shift-n (Windows)</p>
+<p><strong><span id="generating_an_itemlist">Step 2: Create a file with the list of identifiers</span></strong><br />
+You’ll need a text file with the list of archive.org item identifiers from which you want to download files. This file will be used by the wget to download the files.</p>
+<p>If you already have a list of identifiers you can paste or type the identifiers into a file. There should be one identifier per line. The other option is to use the archive.org search engine to create a list based on a query.  To do this we will use <a href="http://archive.org/advancedsearch.php">advanced search</a> to create the list and then download the list in a file.</p>
+<p>First, determine your search query using the search engine.  In this example, I am looking for items in the Prelinger collection with the subject “Health and Hygiene.”  There are currently 41 items that match <a href="http://archive.org/search.php?query=collection%3Aprelinger%20AND%20subject%3A%22Health%20and%20hygiene%22">this query</a>.  Once you’ve figured out your query:</p>
+<ol type="1">
+<li>Go to the <a href="http://archive.org/advancedsearch.php">advanced search page</a> on archive.org. Use the “Advanced Search returning JSON, XML, and more.” section to create a query.  Once you have a query that delivers the results you want click the back button to go back to the advanced search page.<br />
+</li>
+<li>Select “identifier” from the “Fields to return” list.<br />
+</li>
+<li>Optionally sort the results (sorting by “identifier asc” is handy for arranging them in alphabetical order.)<br />
+</li>
+<li>Enter the number of results from step 1 into the “Number of results” box that matches (or is higher than) the number of results your query returns.<br />
+</li>
+<li><p>Choose the “CSV format” radio button.<br />
+This image shows what the advance query would look like for our example:<br />
+<img src="http://blog.archive.org/wp-content/uploads/2012/04/advancedsearch.png" title="advancedsearch" alt="Advanced Search" width="759" height="485" /></p></li>
+<li>Click the search button (may take a while depending on how many results you have.) An alert box will ask if you want your results – click “OK” to proceed.  You’ll then see a prompt to download the “search.csv” file to your computer.  The downloaded file will be in your default download location (often your Desktop or your Downloads folder).<br />
+</li>
+<li>Rename the “search.csv” file “itemlist.txt” (no quotes.)<br />
+</li>
+<li>Drag or move the itemlist.txt file into your “Files” folder that you previously created<br />
+</li>
+<li><p>Open the file in a text program such as TextEdit (Mac) or Notepad (Windows). Delete the first line of copy which reads “identifier”. Be sure you deleted the entire line and that the first line is not a blank line. Now remove all the quotes by doing a search and replace replacing the ” with nothing.</p></li>
+</ol>
+<p>The contents of the itemlist.txt file should now look like this:</p>
+<pre><code>AboutFac1941
+Attitude1949
+BodyCare1948
+Cancer_2
+Careofth1949
+Careofth1951
+CityWate1941</code></pre>
+<p><span style="color: #3366ff;">…………………………………………………………………………………………………………………………</span><br />
+<span style="color: #3366ff;"> NOTE: You can use this advanced search method to create lists of thousands of identifiers, although we don’t recommend using it to retrieve more than 10,000 or so items at once (it will time out at a certain point).</span><br />
+<span style="color: #3366ff;"> ………………………………………………………………………………………………………………………..</span>.</p>
+<p><strong>Step 3:</strong> <strong>Create a wget command</strong><br />
+The wget command uses unix terminology. Each symbol, letter or word represents different options that the wget will execute.</p>
+<p>Below are three typical wget commands for downloading from the identifiers listed in your itemlist.txt file.</p>
+<p>To get all files from your identifier list:<code>wget -r -H -nc -np -nH --cut-dirs=1 -e robots=off -l1 -i ./itemlist.txt -B 'http://archive.org/download/'</code></p>
+<p>If you want to only download certain file formats (in this example pdf and epub) you should include the -A option which stands for “accept”. In this example we would download the pdf and jp2 files<code>wget -r -H -nc -np -nH --cut-dirs=1 -A .pdf,.epub</code> -e robots=off -l1 -i ./itemlist.txt -B ‘http://archive.org/download/’</p>
+<p>To only download all files except specific formats (in this example tar and zip) you should include the -R option which stands for “reject”. In this example we would download all files except tar and zip files:<code>wget -r -H -nc -np -nH --cut-dirs=1 -R .tar,.zip</code> -e robots=off<code>-l1</code>-i ./itemlist.txt -B ‘http://archive.org/download/’</p>
+<p>If you want to modify one of these or craft a new one you may find it easier to do it in a text editing program (TextEdit or NotePad) rather than doing it in the terminal emulator.</p>
+<p><span style="color: #3366ff;">…………………………………………………………………………………………………………………………</span><br />
+<span style="color: #3366ff;"> NOTE: To craft a wget command for your specific needs you might need to understand the various options. It can get complicated so try to get a thorough understanding before experimenting.You can learn more about unix commands at <a href="http://mally.stanford.edu/~sr/computing/basic-unix.html"><span style="color: #3366ff;">Basic unix commands</span></a></span></p>
+<p><span style="color: #3366ff;">An explanation of each options used in our example wget command are as follows:</span></p>
+<p><span style="color: #3366ff;"><code>-r</code>   recursive download; required in order to move from the item identifier down into its individual files``</span></p>
+<p><span style="color: #3366ff;"><code>-H</code>   enable spanning across hosts when doing recursive retrieving (the initial URL for the directory will be on archive.org, and the individual file locations will be on a specific datanode)</span></p>
+<p><span style="color: #3366ff;"><code>-nc</code>   no clobber; if a local copy already exists of a file, don’t download it again (useful if you have to restart the wget at some point, as it avoids re-downloading all the files that were already done during the first pass)</span></p>
+<p><span style="color: #3366ff;"><code>-np</code>   no parent; ensures that the recursion doesn’t climb back <strong>up</strong> the directory tree to other items (by, for instance, following the “../” link in the directory listing)</span></p>
+<p><span style="color: #3366ff;"><code>-nH</code>   no host directories; when using <code>-r</code>, wget will create a directory tree to stick the local copies in, starting with the hostname ({datanode}.us.archive.org/), unless -nH is provided</span></p>
+<p><span style="color: #3366ff;"><code>--cut-dirs=1</code>   completes what -nH started by skipping the hostname; when saving files on the local disk (from a URL like<a href="http://%7Bdatanode%7D.us.archive.org/%7Bdrive%7D/items/%7Bidentifier%7D/%7Bidentifier%7D.pdf"><span style="color: #3366ff;">http://{datanode}.us.archive.org/{drive}/items/{identifier}/{identifier}.pdf</span></a>), skip the /{drive}/items/ portion of the URL, too, so that all {identifier} directories appear together in the current directory, instead of being buried several levels down in multiple {drive}/items/ directories</span></p>
+<p><span style="color: #3366ff;"><code>-e robots=off</code>   archive.org datanodes contain robots.txt files telling robotic crawlers not to traverse the directory structure; in order to recurse from the directory to the individual files, we need to tell wget to ignore the robots.txt directive</span></p>
+<p><span style="color: #3366ff;"><code>-i ../itemlist.txt</code>   location of input file listing all the URLs to use; “../itemlist” means the list of items should appear one level up in the directory structure, in a file called “itemlist.txt” (you can call the file anything you want, so long as you specify its actual name after -i)</span></p>
+<p><span style="color: #3366ff;"><code>-B 'http://archive.org/download/'</code>   base URL; gets prepended to the text read from the -i file (this is what allows us to have just the identifiers in the itemlist file, rather than the full URL on each line)</span></p>
+<p><span style="color: #3366ff;">Additional options that may be needed sometimes:</span></p>
+<p><span style="color: #3366ff;"><code>-l depth --level=depth</code>   Specify recursion maximum depth level depth. The default maximum depth is 5. This option is helpful when you are downloading items that contain external links or URL’s in either the items metadata or other text files within the item. Here’s an example command to avoid downloading external links contained in an items metadata:<code>wget -r -H -nc -np -nH --cut-dirs=1 -l 1 -e robots=off -i ../itemlist.txt -B 'http://archive.org/download/'</code></span></p>
+<p><span style="color: #3366ff;"><code>-A  -R</code>   accept-list and reject-list, either limiting the download to certain kinds of file, or excluding certain kinds of file; for instance, adding the following options to your wget command would download all files except those whose names end with _orig_jp2.tar or _jpg.pdf:<code>wget -r -H -nc -np -nH --cut-dirs=1 -R _orig_jp2.tar,_jpg.pdf</code> -e robots=off -i ../itemlist.txt -B ‘http://archive.org/download/’</span></p>
+<p><span style="color: #3366ff;">And adding the following options would download all files containing zelazny in their names, except those ending with .ps:<code>wget -r -H -nc -np -nH --cut-dirs=1 -A "*zelazny*" -R .ps</code> -e robots=off -i ../itemlist.txt -B ‘http://archive.org/download/’</span></p>
+<p><span style="color: #3366ff;">See <a href="http://www.gnu.org/software/wget/manual/html_node/Types-of-Files.html"><span style="color: #3366ff;">http://www.gnu.org/software/wget/manual/html_node/Types-of-Files.html</span></a> for a fuller explanation.</span><br />
+<span style="color: #3366ff;"> …………………………………………………………………………………………………………………………</span></p>
+<p><strong>Step 4: Run the command</strong><br />
+1. Open your terminal emulator (Terminal or Cygwin)<br />
+2. In your terminal emulator window, move into your folder/directory. To do this:<br />
+For Mac: type cd Desktop/Files<br />
+For Windows type in Cygwin after the $ cd /cygdrive/c/Users/archive/Desktop/Files<br />
+3. Hit return. You have now moved into th e”Files” folder.<br />
+4. In your terminal emulator enter or paste your wget command. If you are using on of the commands on this page be sure to copy the entire command which may be on two lines. You can just cut and paste in Mac. For Cygwin, copy the command, click the Cygwin logo in the upper left corner, select Edit then select Paste.<br />
+5. Hit return to run the command.</p>
+<p>You will see your progress on the screen.  If you have sorted your itemlist.txt alphabetically, you can estimate how far through the list you are based on the screen output. Depending on how many files you are downloading and their size, it may take quite some time for this command to finish running.</p>
+<p><span style="color: #3366ff;">…………………………………………………………………………………………………………………………</span><br />
+<span style="color: #3366ff;"> NOTE: We strongly recommend trying this process with just ONE identifier first as a test to make sure you download the files you want before you try to download files from many items.</span><br />
+<span style="color: #3366ff;"> …………………………………………………………………………………………………………………………</span></p>
+<p><strong>Tips:</strong></p>
+<ul>
+<li>You can terminate the command by pressing “control” and “c” on your keyboard simultaneously while in the terminal window.</li>
+<li>If your command will take a while to complete, make sure your computer is set to never sleep and turn off automatic updates.</li>
+<li>If you think you missed some items (e.g. due to machines being down), you can simply rerun the command after it finishes.  The “no clobber” option in the command will prevent already retrieved files from being overwritten, so only missed files will be retrieved.</li>
+</ul>
+<p>Posted in <a href="http://blog.archive.org/category/technical/">Technical</a> | <span class="comments-link"><a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comments">34 Replies</a></span></p>
+<h3 id="post-navigation">Post navigation</h3>
+<p><span class="nav-previous"><a href="http://blog.archive.org/2012/04/24/internet-hall-of-fame/"><span class="meta-nav">←</span> Internet Hall of Fame</a></span> <span class="nav-next"><a href="http://blog.archive.org/2012/05/01/improved-theoraogg-video-derivatives/">Improved theora/ogg video derivatives! <span class="meta-nav">→</span></a></span></p>
+<h2 id="thoughts-on-downloading-in-bulk-using-wget">34 thoughts on “Downloading in bulk using wget”</h2>
+<ol type="1">
+<li><p><span id="li-comment-131347"><img src="http://2.gravatar.com/avatar/284f24d3e724c5b996f04e917b216f23?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/284f24d3e724c5b996f04e917b216f23?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong><a href="http://www.thomasvanhoutte.be" class="url">Thomas Vanhoutte</a></strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-131347">April 29, 2012 at 10:32 pm</a></span> The power of unix, once again proven.<br />
+Thanks for the step by step explaination.</p></li>
+<li><p><span id="li-comment-132078"><img src="http://2.gravatar.com/avatar/eccd85ad4be3d50b15490cfaf4c348c2?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/eccd85ad4be3d50b15490cfaf4c348c2?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>John Hauser</strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-132078">May 2, 2012 at 5:48 am</a></span> Thanks for this clear and detailed post!</p>
+<p>In my case, using ubuntu 10.04, i had to add a couple of extra parameters:<br />
+-D archive.org –exclude-domains blog.archive.org –exclude-domains web.archive.org</p>
+<p>to keep wget from wandering off into related domains like openlibrary.org, nasaimages.org and archive-it.org referred to on the <a href="http://www.archive.org" class="uri">http://www.archive.org</a> home page (announcements section and /projects). The exclude-domain parameters were necessary to keep wget from recursing down into the indicated sites.</p>
+<p>i don’t know if this is a DNS name resolution artifact of running the command from outside of archive.org vs. inside, but a little experimentation with your command example got me to the answer within a couple of tries.</p></li>
+<li><p><span id="li-comment-134818"><img src="http://0.gravatar.com/avatar/30a58ec163c89be2d20a3a302750c5e2?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://0.gravatar.com/avatar/30a58ec163c89be2d20a3a302750c5e2?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>Jim Walton</strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-134818">May 11, 2012 at 4:43 am</a></span> Not getting it to work. First, the argument -cut-dirs should be –cut-dirs, at least in Windows otherwise I get an invalid argument error. When I run it I get a list of invalid URL and unsupported scheme errors. I have added the argument -A pdf to only download pdf files.</p>
+<p>What I have done is created a csv file from advanced search and ran a script to strip off the quotes. When I run wget, it produces the url ‘http://www.archive.org/download/[filename from items.txt].</p>
+<p>Where do I go from here?</p></li>
+<li><p><span id="li-comment-134835"><img src="http://0.gravatar.com/avatar/30a58ec163c89be2d20a3a302750c5e2?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://0.gravatar.com/avatar/30a58ec163c89be2d20a3a302750c5e2?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>Jim Walton</strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-134835">May 11, 2012 at 6:20 am</a></span> –cut-dirs should read – -cut-dirs. The two dashes were converted to an em dash…</p></li>
+<li><p><span id="li-comment-135038"><img src="http://0.gravatar.com/avatar/30a58ec163c89be2d20a3a302750c5e2?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://0.gravatar.com/avatar/30a58ec163c89be2d20a3a302750c5e2?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>Jim Walton</strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-135038">May 11, 2012 at 11:09 pm</a></span> This doesn’t seem to work in Windows, but works fine in Linux. Just be aware that the –cut-dirs uses 2 dashes, not a single one as it appears on the web site. The browser converts the double dash into an emdash.</p>
+<p>In addition to the -D and –exclude-domains arguments I also added -nd so I would get all the files in a single directory instead of creating a separate directory for each file.</p>
+<p>For those who don’t normally use Linux or wget, typing “wget -help &gt;wget.txt” without the quotes will save all the help commands in a text file in the current directory.</p></li>
+<li><p><span id="li-comment-143399"><img src="http://1.gravatar.com/avatar/a67fd27732a4e772106474051dc2341c?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://1.gravatar.com/avatar/a67fd27732a4e772106474051dc2341c?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>silvermane</strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-143399">May 30, 2012 at 7:25 pm</a></span> This does work on Windows, you just have to replace single with double quotes after the -B argument, and watch out for the em-dashes.</p>
+<p>Command line examples should be placed within a [code] tag to prevent their “beautifying.”</p></li>
+<li><p><span id="li-comment-160972"><img src="http://1.gravatar.com/avatar/7441b1b55fc32867998c2c004e83191d?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://1.gravatar.com/avatar/7441b1b55fc32867998c2c004e83191d?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong><a href="http://declan.net" class="url">Declan Fleming</a></strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-160972">June 30, 2012 at 5:25 pm</a></span> I’m not saying this is the prettiest hack, but it finally worked on Ubuntu:</p>
+<p>wget -r -l 1 -nc -H -np -nH -e robots=off –cut-dirs=1 -i ../itemlist.txt -B ‘http://www.archive.org/download/’</p>
+<p>the -np option was not working for me, and it kept traversing up. I locked the recursion down to 1 level and that seemed to work!</p>
+<p>D</p></li>
+<li><p><span id="li-comment-249079"><img src="http://0.gravatar.com/avatar/315628d84b0304b5e6166bf05fcd3520?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://0.gravatar.com/avatar/315628d84b0304b5e6166bf05fcd3520?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>kumar</strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-249079">January 17, 2013 at 9:50 am</a></span> Hi,</p>
+<p>I need to download a set of files which i have mentioned in a file (x.txt), after download i need all the files to be moved with today’s date and i need all that files names should append to a .csv file in a single row with a space in between each file.<br />
+does anyone have idea. If so help me out to fix my problem.</p>
+<ol type="1">
+<li><p><span id="li-comment-254494"><img src="http://0.gravatar.com/avatar/9fc10fa6ecfdd53bebaef15fcb6ca459?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://0.gravatar.com/avatar/9fc10fa6ecfdd53bebaef15fcb6ca459?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>Jason</strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-254494">February 10, 2013 at 10:56 pm</a></span> You don’t say what operating system you’re using.<br />
+In linux something like</p>
+<p>touch *<br />
+ls | tr “\n” “,” &gt;text.csv<br />
+mv * [target-dir]</p></li>
+</ol></li>
+<li><p>Pingback: <a href="http://blog.archive.org/2013/01/20/bulk-downloading-aaron-swartz-and-terms-of-service/" class="url">Bulk Downloading, Aaron Swartz, and Terms of Service | Internet Archive Blogs</a></p></li>
+<li><p>Pingback: <a href="http://www.myblogdammit.net/?p=8443" class="url">Aaron Swartz Memorial | It’s My Blog, Dammit! …. Anything and Everything!</a></p></li>
+<li><p><span id="li-comment-254401"><img src="http://0.gravatar.com/avatar/66dee7a1f31292913f5ea6b38491dba1?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://0.gravatar.com/avatar/66dee7a1f31292913f5ea6b38491dba1?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>Ralph H</strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-254401">February 10, 2013 at 8:40 am</a></span> This seems like an unnecessarily complex process, when all I really need is a list of archive.org URLs that I can feed to wget or another bulk HTTP downloader.<br />
+Here’s the wget output:<br />
+–2013-02-10 03:32:07– <a href="http://archive.org/details/68micro-vol-01-num-3" class="uri">http://archive.org/details/68micro-vol-01-num-3</a><br />
+Connecting to archive.org|207.241.224.2|:80… connected.<br />
+HTTP request sent, awaiting response… 200 OK<br />
+Length: unspecified [text/html]<br />
+Saving to: `68micro-vol-01-num-3′<br />
+[ ] 18,499 98.3K/s in 0.2s<br />
+2013-02-10 03:32:08 (98.3 KB/s) – `68micro-vol-01-num-3′ saved [18499]<br />
+<strong>Removing 68micro-vol-01-num-3 since it should be rejected.</strong> <em>waste of bandwidth</em></p>
+<ol type="1">
+<li><p>It appears that wget is actually downloading unrelated web pages just to retrieve the links to the PDF files. This is odd, since I specified the ‘-A’ option to only permit .pdf files – Shouldn’t I be able to search for these (or any other filetype directly?)</p></li>
+<li><p>Searching for identifiers seems like the wrong thing to search for, given that I still have to allow wget to traverse a directory in hopes of finding a .pdf file.<br />
+Knowing how the web sites are structured, and the arcane list of servers and</p></li>
+</ol></li>
+<li><p>Pingback: <a href="http://gareth.halfacree.co.uk/2013/04/bulk-downloading-collections-from-archive-org" class="url">Bulk Downloading Collections from Archive.org | Gareth Halfacree</a></p></li>
+<li><p><span id="li-comment-266003"><img src="http://0.gravatar.com/avatar/0c81deab3b848f5d7c97f25a6213a034?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://0.gravatar.com/avatar/0c81deab3b848f5d7c97f25a6213a034?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>Hank Bromley</strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-266003">April 4, 2013 at 7:22 pm</a></span> Note that I have edited the original post, replacing “http://www.archive.org/…” with “http://archive.org/”.</p>
+<p>Some time ago – but after I initially formulated the wget command – we arranged for <a href="http://www.archive.org" class="uri">http://www.archive.org</a> requests to redirect to archive.org. I haven’t tracked down exactly why, but that redirect is apparently causing wget to see lots of additional links it wasn’t intended to, beyond those inside the targeted item directories, and consequently downloading many unrelated files. Dropping the “www.” makes it behave correctly again.</p>
+<p>Some of the modifications suggested in previous comments were generated in order to cope with that misbehavior, and may not be necessary with the “www.” removed.</p>
+<p>Also, the <a href="http://gareth.halfacree.co.uk/2013/04/bulk-downloading-collections-from-archive-org">pingback</a> just above, from <a href="http://gareth.halfacree.co.uk/">Gareth Halfacree</a>, offers a handy shell script that simplifies using the wget, as it combines the several steps into a single convenient command. Check it out!</p></li>
+<li><p>Pingback: <a href="http://blog.archive.org/2013/04/11/450000-early-journal-articles-now-available/" class="url">450,000 Early Journal Articles Now Available | Internet Archive Blogs</a></p></li>
+<li><p><span id="li-comment-267643"><img src="http://2.gravatar.com/avatar/532ab47fe2be7f6ad81502f619e40389?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/532ab47fe2be7f6ad81502f619e40389?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>desu</strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-267643">April 12, 2013 at 5:35 pm</a></span> There is a wget for Windows, doesn’t that make installing cygwin kinda unnecessary?</p></li>
+<li><p>Pingback: <a href="http://www.infodocket.com/2013/04/13/jstor-early-journal-content-articles-now-accessible-via-internet-archive/" class="url">JSTOR “Early Journal Content” Articles Now Accessible via Internet Archive | LJ INFOdocket</a></p></li>
+<li><p>Pingback: <a href="http://catwizard.net/posts/20130416194839.html" class="url">1923年前外文期刊：免费访问、批量下载、文本挖掘 » 编目精灵III</a></p></li>
+<li><p>Pingback: <a href="http://ianmilligan.ca/2013/05/10/an-aside-an-ode-to-exploratory-research/" class="url">An Aside: An Ode to Exploratory Research | Ian Milligan</a></p></li>
+<li><p><span id="li-comment-275760"><img src="http://0.gravatar.com/avatar/93cfaa9e13f3e1568d35a4e817f34494?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://0.gravatar.com/avatar/93cfaa9e13f3e1568d35a4e817f34494?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>kalpaz</strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-275760">June 9, 2013 at 12:29 pm</a></span> i am trying to search the books which are available in pdf format, please guide me what should i put in the advance search and where</p></li>
+<li><p>Pingback: <a href="http://ianmilligan.ca/2013/06/17/finding-ca-domains-in-the-80tb-wide-crawl/" class="url">Finding .ca domains in the 80TB Wide Crawl | Ian Milligan</a></p></li>
+<li><p><span id="li-comment-278061"><img src="http://2.gravatar.com/avatar/5874476a4dc0b10817debc60df58f6a3?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/5874476a4dc0b10817debc60df58f6a3?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong><a href="http://archive.org" class="url">brewster</a></strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-278061">June 26, 2013 at 1:27 pm</a></span> This is a useful tutorial on bulk downloading and then how to make a simple search engine out of the results: <a href="http://williamjturkel.net/2013/06/25/batch-downloading-and-building-simple-search-engines-with-command-line-tools-in-linux/" class="uri">http://williamjturkel.net/2013/06/25/batch-downloading-and-building-simple-search-engines-with-command-line-tools-in-linux/</a></p></li>
+<li><p>Pingback: <a href="http://blog.archive.org/2013/07/04/how-to-use-the-virtual-machine-for-researchers/" class="url">How to use the Virtual Machine for Researchers | Internet Archive Blogs</a></p></li>
+<li><p><span id="li-comment-282145"><img src="http://0.gravatar.com/avatar/c3c70a4de76f7a42da6bb773f852db60?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://0.gravatar.com/avatar/c3c70a4de76f7a42da6bb773f852db60?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong><a href="http://blogginggate.com/" class="url">peng wu</a></strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-282145">July 31, 2013 at 8:08 am</a></span> Thanks for easy detail. This is a useful bulk downloading.</p></li>
+<li><p>Pingback: <a href="http://ianmilligan.ca/2013/08/02/search-engine-on-the-warc-collection/" class="url">Search Engine on the WARC Collection: An Update on my Project | Ian Milligan</a></p></li>
+<li><p><span id="li-comment-284066"><img src="http://2.gravatar.com/avatar/811e259f59ab77d9664c590885bec84a?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/811e259f59ab77d9664c590885bec84a?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong><a href="http://www.jeffreythompson.org" class="url">Jeff Thompson</a></strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-284066">August 9, 2013 at 11:16 pm</a></span> FWIW, I found that changing <code>--cut-dirs=2</code> to <code>--cut-dirs=3</code> downloaded just the files themselves, not creating and enclosing them in directory.</p></li>
+<li><p><span id="li-comment-286397"><img src="http://2.gravatar.com/avatar/b4faf1233f484524a179ba1e1ec9e8b0?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/b4faf1233f484524a179ba1e1ec9e8b0?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong><a href="http://www.nexopia.com/users/taurusrefund5/blog/101-video-advertising-your-business-how-to-begin" class="url">google seo check</a></strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-286397">August 23, 2013 at 8:35 pm</a></span> Examples include the ‘description’ of the<br />
+content, ‘keywords’ used and the ‘Title’ of the page.<br />
+Image ALT Tags – Alt image tags are associated with images on<br />
+a website. He has to deal with traffic getting back<br />
+to his office.</p></li>
+<li><p><span id="li-comment-292474"><img src="http://2.gravatar.com/avatar/e142e0c8993fa429b57bfa5003109b35?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/e142e0c8993fa429b57bfa5003109b35?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>???</strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-292474">October 15, 2013 at 12:10 pm</a></span> don’t know wut the hell you guys are talking about.</p>
+<p>I’m using windows7 and hence i wanted to download internet acrchive through cygwin which the above instruction has suggested. i install pretty much whole package but the result doesn’t work, at all. I’m just wondering how the internet archive isn’t that considering novice like me.. just hope they provide download engine someday. seriously i got a deeper frustration on this. been spending too much time, energy, and effort on this but I earned nothing except anger, dipression &amp; disappointing.</p></li>
+<li><p><span id="li-comment-292493"><img src="http://2.gravatar.com/avatar/e142e0c8993fa429b57bfa5003109b35?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/e142e0c8993fa429b57bfa5003109b35?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>???</strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-292493">October 15, 2013 at 2:10 pm</a></span> I apologize about my prior negative comment, I figured out the way via following the instruction above, from the beginning to its end. thx for such a kind instruction!</p></li>
+<li><p><span id="li-comment-294685"><img src="http://2.gravatar.com/avatar/29af664bb34c9f9edd8abc7eb34f9e7a?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/29af664bb34c9f9edd8abc7eb34f9e7a?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong><a href="http://kascouponcode.com/kaspersky-antivirus-2014-coupon-and-review/" class="url">Kaspersky Coupon</a></strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-294685">October 27, 2013 at 7:20 pm</a></span> FWIW, I found that changing –cut-dirs=2 to –cut-dirs=3 downloaded just the files themselves, not creating and enclosing them in directory.</p></li>
+<li><p><span id="li-comment-294686"><img src="http://2.gravatar.com/avatar/55393d6123f556b9c6431f07034951b6?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/55393d6123f556b9c6431f07034951b6?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong><a href="http://kascouponcode.com/" class="url">rahul</a></strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-294686">October 27, 2013 at 7:21 pm</a></span> Why do we have to create a folder to download wget in bulk, I think we can download without it as well</p></li>
+<li><p><span id="li-comment-294758"><img src="http://2.gravatar.com/avatar/ed4329981126d947ca83f93ea95b2a72?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/ed4329981126d947ca83f93ea95b2a72?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong><a href="http://www.bariatricmexico.com" class="url">JC</a></strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-294758">October 28, 2013 at 6:03 am</a></span> Thank you, awesome instructions.</p></li>
+<li><p><span id="li-comment-299968"><img src="http://1.gravatar.com/avatar/a596a4f3d2e938ded806c64483e08b9c?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://1.gravatar.com/avatar/a596a4f3d2e938ded806c64483e08b9c?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong><a href="http://mcafeepromocodes.org/" class="url">McAfeepromocodes</a></strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-299968">November 21, 2013 at 6:31 pm</a></span> FWIW, I found that changing –cut-dirs=2 to –cut-dirs=3 downloaded just the files themselves, not creating and enclosing them in directory.</p></li>
+<li><p><span id="li-comment-304902"><img src="http://2.gravatar.com/avatar/896f532b9e11e97d3fc808d4b871673b?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/896f532b9e11e97d3fc808d4b871673b?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong><a href="http://techpromocodes.com" class="url">Tech Promo</a></strong> <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/#comment-304902">December 15, 2013 at 5:07 pm</a></span> Why do we have to create a folder to download wget in bulk, I think we can download without it as well</p></li>
+</ol>
+<p>Comments are closed.</p>
+<p><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fblog.archive.org%2F2012%2F04%2F26%2Fdownloading-in-bulk-using-wget" class="shareitem"><img src="http://blog.archive.org/wp-content/plugins/archive-sharing-widget/public/images/facebook-icon.png" alt="Share to Facebook" /></a> <a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fblog.archive.org%2F2012%2F04%2F26%2Fdownloading-in-bulk-using-wget&amp;via=internetarchive&amp;text=Downloading+in+bulk+using+wget" class="shareitem"><img src="http://blog.archive.org/wp-content/plugins/archive-sharing-widget/public/images/twitter-icon.png" alt="Share to Twitter" /></a></p>
+<p>Search for:</p>
+<h3 id="recent-posts">Recent Posts</h3>
+<ul>
+<li><a href="http://blog.archive.org/2021/10/22/turns-out-its-not-the-technology-its-the-people/">Turns Out It’s Not the Technology, It’s the People</a></li>
+<li><a href="http://blog.archive.org/2021/10/21/laturbo-hypertextwishes/">LaTurbo Avedon’s Hypertext Wishes</a></li>
+<li><a href="http://blog.archive.org/2021/10/20/celebrating-kanta-kapoor-2021-internet-archive-hero-award-recipient/">Celebrating Kanta Kapoor: 2021 Internet Archive Hero Award Recipient</a></li>
+<li><a href="http://blog.archive.org/2021/10/20/celebrating-lisa-radha-weaver-2021-internet-archive-hero-award-recipient/">Celebrating Lisa Radha Weaver: 2021 Internet Archive Hero Award Recipient</a></li>
+<li><a href="http://blog.archive.org/2021/10/20/olia-lialina-gives-good-wishes-with-her-artwork-perpetual-calendar/">Olia Lialina gives good wishes with her artwork Perpetual Calendar</a></li>
+</ul>
+<h3 id="recent-comments">Recent Comments</h3>
+<ul>
+<li><span class="comment-author-link"><a href="https://gisomusic.com/" class="url">giso</a></span> on <a href="http://blog.archive.org/2021/10/22/turns-out-its-not-the-technology-its-the-people/#comment-412129">Turns Out It’s Not the Technology, It’s the People</a></li>
+<li><span class="comment-author-link"><a href="https://violinmusics.com/" class="url">آهنگ جدید</a></span> on <a href="http://blog.archive.org/2021/10/22/turns-out-its-not-the-technology-its-the-people/#comment-412119">Turns Out It’s Not the Technology, It’s the People</a></li>
+<li><span class="comment-author-link">Madhulika</span> on <a href="http://blog.archive.org/2021/10/20/celebrating-kanta-kapoor-2021-internet-archive-hero-award-recipient/#comment-412050">Celebrating Kanta Kapoor: 2021 Internet Archive Hero Award Recipient</a></li>
+<li><span class="comment-author-link"><a href="https://librarycognizance.blogspot.com/" class="url">Rangoli Awasthi</a></span> on <a href="http://blog.archive.org/2021/10/13/librarians-kanta-kapoor-and-lisa-radha-weaver-to-receive-internet-archive-hero-award-2021/#comment-412047">Librarians Kanta Kapoor and Lisa Radha Weaver to Receive 2021 Internet Archive Hero Award</a></li>
+<li><span class="comment-author-link">Kanta Kapoor</span> on <a href="http://blog.archive.org/2021/10/20/celebrating-kanta-kapoor-2021-internet-archive-hero-award-recipient/#comment-412032">Celebrating Kanta Kapoor: 2021 Internet Archive Hero Award Recipient</a></li>
+</ul>
+<h3 id="categories">Categories</h3>
+<ul>
+<li><a href="http://blog.archive.org/category/audio-archive/78rpm/">78rpm</a></li>
+<li><a href="http://blog.archive.org/category/announcements/">Announcements</a></li>
+<li><a href="http://blog.archive.org/category/archive-version-2/">Archive Version 2</a></li>
+<li><a href="http://blog.archive.org/category/archive-it/">Archive-It</a></li>
+<li><a href="http://blog.archive.org/category/audio-archive/">Audio Archive</a></li>
+<li><a href="http://blog.archive.org/category/books-archive/">Books Archive</a></li>
+<li><a href="http://blog.archive.org/category/cool-items/">Cool items</a></li>
+<li><a href="http://blog.archive.org/category/education-archive/">Education Archive</a></li>
+<li><a href="http://blog.archive.org/category/emulation/">Emulation</a></li>
+<li><a href="http://blog.archive.org/category/event/">Event</a></li>
+<li><a href="http://blog.archive.org/category/image-archive/">Image Archive</a></li>
+<li><a href="http://blog.archive.org/category/jobs/">Jobs</a></li>
+<li><a href="http://blog.archive.org/category/books-archive/lending-books/">Lending Books</a></li>
+<li><a href="http://blog.archive.org/category/live-music-archive-2/">Live Music Archive</a></li>
+<li><a href="http://blog.archive.org/category/movie-archive/">Movie Archive</a></li>
+<li><a href="http://blog.archive.org/category/music/">Music</a></li>
+<li><a href="http://blog.archive.org/category/news/">News</a></li>
+<li><a href="http://blog.archive.org/category/newsletter/">Newsletter</a></li>
+<li><a href="http://blog.archive.org/category/open-library/">Open Library</a></li>
+<li><a href="http://blog.archive.org/category/event/past-event/">Past Event</a></li>
+<li><a href="http://blog.archive.org/category/software-archive/">Software Archive</a></li>
+<li><a href="http://blog.archive.org/category/technical/">Technical</a></li>
+<li><a href="http://blog.archive.org/category/television-archive/">Television Archive</a></li>
+<li><a href="http://blog.archive.org/category/event/upcoming-event/">Upcoming Event</a></li>
+<li><a href="http://blog.archive.org/category/video-archive/">Video Archive</a></li>
+<li><a href="http://blog.archive.org/category/wayback-machine/">Wayback Machine – Web Archive</a></li>
+<li><a href="http://blog.archive.org/category/web-data-services/">Web &amp; Data Services</a></li>
+</ul>
+<h3 id="archives">Archives</h3>
+<p>Archives Select Month October 2021 September 2021 August 2021 July 2021 June 2021 May 2021 April 2021 March 2021 February 2021 January 2021 December 2020 November 2020 October 2020 September 2020 August 2020 July 2020 June 2020 May 2020 April 2020 March 2020 February 2020 January 2020 December 2019 November 2019 October 2019 September 2019 August 2019 July 2019 June 2019 May 2019 April 2019 March 2019 February 2019 January 2019 December 2018 November 2018 October 2018 September 2018 August 2018 July 2018 June 2018 May 2018 April 2018 March 2018 February 2018 January 2018 December 2017 November 2017 October 2017 September 2017 August 2017 July 2017 June 2017 May 2017 April 2017 March 2017 February 2017 January 2017 December 2016 November 2016 October 2016 September 2016 August 2016 July 2016 June 2016 May 2016 April 2016 March 2016 February 2016 January 2016 December 2015 November 2015 October 2015 September 2015 July 2015 June 2015 May 2015 April 2015 March 2015 February 2015 January 2015 December 2014 November 2014 October 2014 September 2014 August 2014 July 2014 June 2014 May 2014 April 2014 March 2014 February 2014 January 2014 December 2013 November 2013 October 2013 September 2013 August 2013 July 2013 June 2013 May 2013 April 2013 March 2013 February 2013 January 2013 December 2012 November 2012 October 2012 September 2012 August 2012 July 2012 June 2012 May 2012 April 2012 March 2012 February 2012 January 2012 December 2011 November 2011 October 2011 September 2011 August 2011 July 2011 June 2011 May 2011 April 2011 March 2011 February 2011 January 2011 December 2010 November 2010 October 2010 September 2010 August 2010 July 2010 June 2010 May 2010 April 2010 March 2010 February 2010 January 2010 December 2009 October 2009 September 2009 August 2009 July 2009 June 2009 May 2009 April 2009 March 2009 February 2009 January 2009 December 2008 November 2008 September 2008 August 2008 June 2008 May 2008 April 2008 March 2008 February 2008 January 2008 December 2007 October 2007 September 2007 August 2007 July 2007 June 2007 May 2007 April 2007 March 2007 February 2007 January 2007 December 2006 November 2006 October 2006 September 2006 August 2006 February 2006 November 2005 October 2005 September 2005 March 2005 February 2005 January 2005 December 2004 October 2004 March 2004</p>
+<h3 id="meta">Meta</h3>
+<ul>
+<li><a href="http://blog.archive.org/wp-login.php">Log in</a></li>
+<li><a href="http://blog.archive.org/feed/">Entries feed</a></li>
+<li><a href="http://blog.archive.org/comments/feed/">Comments feed</a></li>
+<li><a href="https://wordpress.org/">WordPress.org</a></li>
+</ul>
+<p><a href="https://wordpress.org/" class="imprint" title="Semantic Personal Publishing Platform">Proudly powered by WordPress</a></p>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>index</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+</head>
+<body>
+<h1 id="internet-archive-blogs"><a href="http://blog.archive.org/" title="Internet Archive Blogs">Internet Archive Blogs</a></h1>
+<h2 id="a-blog-from-the-team-at-archive.org">A blog from the team at archive.org</h2>
+<p><a href="https://anniversary.archive.org" title="Celebrate our 25th anniversary with us."><img src="http://blog.archive.org/wp-content/uploads/2021/07/blog-header-02-lines-1.png" alt="Internet Archive Blogs" class="header-image" width="4108" height="864" /></a></p>
+<p>Menu</p>
+<p><a href="#content" class="assistive-text" title="Skip to content">Skip to content</a></p>
+<ul>
+<li><span id="menu-item-7707"><a href="https://blog.archive.org">Blog</a></span></li>
+<li><span id="menu-item-3417"><a href="http://blog.archive.org/category/announcements/">Announcements</a></span></li>
+<li><span id="menu-item-7359"><a href="https://anniversary.archive.org">25th Anniversary</a></span></li>
+<li><span id="menu-item-3422"><a href="https://archive.org">archive.org</a></span></li>
+<li><span id="menu-item-3421"><a href="http://blog.archive.org/about/">About</a></span></li>
+<li><span id="menu-item-15173"><a href="http://blog.archive.org/category/event/">Events</a></span></li>
+<li><span id="menu-item-8100"><a href="http://blog.archive.org/developers/">Developers</a></span></li>
+<li><span id="menu-item-15172"><a href="http://archive.org/donate">Donate</a></span></li>
+</ul>
+<h1 id="how-archive.org-items-are-structured">How Archive.org items are structured</h1>
+<p>Posted on <a href="http://blog.archive.org/2011/03/31/how-archive-org-items-are-structured/" title="4:59 am">March 31, 2011</a><span class="by-author"> by <span class="author vcard"><a href="http://blog.archive.org/author/wayback/" class="url fn n" title="View all posts by Alexis Rossi">Alexis Rossi</a></span></span></p>
+<p><strong>What is an item?</strong></p>
+<p>An item is a logical “thing” that we present on one web page on archive.org. An item may be one video file along with scans of the DVD cover, one book, one audio file, or a set of audio files that represent a CD , etc.</p>
+<p>How do you know whether your files should be in one item or separate items?  You get one metadata file per item.  If the same metadata describes ALL of the files (like a CD), then that’s one item.  If the files are too different to have the same metadata (title, creator, description, etc.), they should be in different items.</p>
+<p><strong>How Items Are Structured</strong></p>
+<p>All archive.org items have this format URL:<br />
+<strong>http://archive.org/details/<span style="color: #800080;">[identifier] </span></strong><br />
+(where [identifier] is unique within our system).</p>
+<blockquote>
+<p>Example: For this item<br />
+<a href="http://www.archive.org/details/popeye_taxi-turvey" class="uri">http://www.archive.org/details/popeye_taxi-turvey</a><br />
+the identifier is <strong>popeye_taxi-turvey</strong></p>
+</blockquote>
+<p>An item is just a directory or folder of files that includes the originally uploaded content file(s) – audio, video, text, etc. – along with any derivative files we create from the originals and the metadata that describes the item.  To see all files in an item, click the HTTP link in the upper left box on the item page (circled in red below).</p>
+<p><img src="http://blog.archive.org/wp-content/uploads/2011/03/HTTPlink.png" title="HTTP link" class="aligncenter size-full wp-image-3003" sizes="(max-width: 693px) 100vw, 693px" srcset="http://blog.archive.org/wp-content/uploads/2011/03/HTTPlink.png 693w, http://blog.archive.org/wp-content/uploads/2011/03/HTTPlink-300x244.png 300w" width="693" height="564" /></p>
+<p>That link takes you to a directory listing showing all original, derived, and metadata files for the item.</p>
+<p><img src="http://blog.archive.org/wp-content/uploads/2011/03/Screen-shot-2011-04-05-at-11.44.38-AM.png" title="Directory listing" class="aligncenter size-full wp-image-3005" sizes="(max-width: 728px) 100vw, 728px" srcset="http://blog.archive.org/wp-content/uploads/2011/03/Screen-shot-2011-04-05-at-11.44.38-AM.png 728w, http://blog.archive.org/wp-content/uploads/2011/03/Screen-shot-2011-04-05-at-11.44.38-AM-300x99.png 300w" width="728" height="241" /></p>
+<p>You can view information about every file in this directory by viewing the file ending in _files.xml (in this example, popeye_taxi-turvey_files.xml). Each file in the item is listed here, along with whether the source is “original” (uploaded by the user), “derivative” (derived by archive.org), or “metadata” file.  You will also find a format designation, various checksums, and sometimes titles for the files.</p>
+<p><img src="http://blog.archive.org/wp-content/uploads/2011/03/Screen-shot-2011-04-05-at-11.57.39-AM.png" title="files.xml" class="aligncenter size-full wp-image-3010" sizes="(max-width: 512px) 100vw, 512px" srcset="http://blog.archive.org/wp-content/uploads/2011/03/Screen-shot-2011-04-05-at-11.57.39-AM.png 512w, http://blog.archive.org/wp-content/uploads/2011/03/Screen-shot-2011-04-05-at-11.57.39-AM-293x300.png 293w" width="512" height="523" /></p>
+<p>To see all of the metadata for the item, view the file ending in _meta.xml (in this example, popeye_taxi-turvey_meta.xml). This file should list all of the pertinent information about the item, such as title, creator, description, etc.  IA’s metadata schema is based on Dublin Core, but it is extremely flexible.  You can add any key=value pair to this file and we will store it and make it searchable in the IA search engine.  (However, it may not automatically show up on the item page.)</p>
+<p><img src="http://blog.archive.org/wp-content/uploads/2011/03/Screen-shot-2011-04-05-at-11.59.31-AM.png" title="meta.xml" class="aligncenter size-full wp-image-3011" sizes="(max-width: 496px) 100vw, 496px" srcset="http://blog.archive.org/wp-content/uploads/2011/03/Screen-shot-2011-04-05-at-11.59.31-AM.png 496w, http://blog.archive.org/wp-content/uploads/2011/03/Screen-shot-2011-04-05-at-11.59.31-AM-300x166.png 300w" width="496" height="276" /></p>
+<p>Reviews, if there are any, are contained in the _reviews.xml file.</p>
+<p>One thing to note: Many “display” characteristics on archive.org, among other things, work better if your item’s identifier matches your file name.  So if you’re uploading a file called popeye_taxi-turvey.mpg, it’s best to use the identifier popeye_taxi-turvey (just remove the file extension).  If you’re using the upload button on archive.org, put your desired identifier in the Title field of the upload form.  We turn that into the identifier automatically, and then after upload you can go back into the item and change the title to something more readable.</p>
+<p><strong>Archival URLs</strong></p>
+<p>An item’s “details” page will always be available at<br />
+<span style="color: #800080;">http://archive.org/<strong>details</strong>/[identifier] </span></p>
+<p>The item directory is always available at<br />
+<span style="color: #800080;">http://archive.org/<strong>download</strong>/[identifier]<br />
+</span></p>
+<p>A particular file can always be downloaded from<br />
+<span style="color: #800080;">http://archive.org/<strong>download</strong>/[identifier]/[filename]</span></p>
+<p>Please Note: Archival URLs may redirect to an actual server that contains the content.  For example<br />
+http://www.archive.org/download/popeye_taxi-turvey<br />
+currently redirects to<br />
+http://ia600204.us.archive.org/14/items/popeye_taxi-turvey/<br />
+DO NOT LINK to any archive.org URL that begins with numbers like this.  This refers to the particular machine that we’re serving the file from right now, but we move items to new servers all the time.  If you link to this sort of URL, instead of the archival URL, your link WILL break at some point.</p>
+<p>Posted in <a href="http://blog.archive.org/category/technical/">Technical</a> | <span class="comments-link"><a href="http://blog.archive.org/2011/03/31/how-archive-org-items-are-structured/#comments">7 Replies</a></span></p>
+<h3 id="post-navigation">Post navigation</h3>
+<p><span class="nav-previous"><a href="http://blog.archive.org/2011/03/30/the-real-mad-men/"><span class="meta-nav">←</span> The Real Mad Men</a></span> <span class="nav-next"><a href="http://blog.archive.org/2011/04/14/digitizing-balinese-lontars/">Digitizing Balinese Lontars <span class="meta-nav">→</span></a></span></p>
+<h2 id="thoughts-on-how-archive.org-items-are-structured">7 thoughts on “How Archive.org items are structured”</h2>
+<ol type="1">
+<li><p><span id="li-comment-13697"><img src="http://0.gravatar.com/avatar/033f7b91e5db5de93482974157ba75d5?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://0.gravatar.com/avatar/033f7b91e5db5de93482974157ba75d5?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>Lars Aronsson</strong> <a href="http://blog.archive.org/2011/03/31/how-archive-org-items-are-structured/#comment-13697">April 18, 2011 at 4:40 pm</a></span> It’s sad that the Internet Archive doesn’t provide any structure for series or collections of items. Defining such a structure is a lot of work, and it’s sad that it can’t be shared with other visitors of the Internet Archive.</p>
+<p>One example is my identification of the series and volumes of the Transactions of the Swedish Academy, which now resides on Wikimedia Commons instead of the Internet Archive, <a href="http://commons.wikimedia.org/wiki/Category_talk:Svenska_Akademiens_handlingar" class="uri">http://commons.wikimedia.org/wiki/Category_talk:Svenska_Akademiens_handlingar</a></p>
+<ol type="1">
+<li><p><span id="li-comment-15747"><img src="http://0.gravatar.com/avatar/9dbd31625bbfd231e6ee9fcf8ca345ec?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://0.gravatar.com/avatar/9dbd31625bbfd231e6ee9fcf8ca345ec?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>internetarchive</strong> <a href="http://blog.archive.org/2011/03/31/how-archive-org-items-are-structured/#comment-15747">May 3, 2011 at 11:55 pm</a></span> Hi Lars,</p>
+<p>Archive.org currently has more than 8,000 collections of items. Here is an example: <a href="http://www.archive.org/details/harvardclassics" class="uri">http://www.archive.org/details/harvardclassics</a></p>
+<p>If you are interested in having a collection on archive.org, you can contact us for further information at info at archive dot org.</p>
+<p>Alexis</p></li>
+</ol></li>
+<li><p><span id="li-comment-13772"><img src="http://2.gravatar.com/avatar/8158a74302cdcc4dc668760470ce51be?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/8158a74302cdcc4dc668760470ce51be?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong><a href="http://akfoerster.de/en" class="url">Andreas K. Förster</a></strong> <a href="http://blog.archive.org/2011/03/31/how-archive-org-items-are-structured/#comment-13772">April 19, 2011 at 2:41 pm</a></span> Feature request: There should be a way to link items with each other. For example alternative recordings, or book scans with the LibriVox audio-book and so on.<br />
+The linked item should automatically be linked back.</p>
+<p>I hope this was the right place to post such ideas…</p>
+<ol type="1">
+<li><p><span id="li-comment-15749"><img src="http://0.gravatar.com/avatar/9dbd31625bbfd231e6ee9fcf8ca345ec?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://0.gravatar.com/avatar/9dbd31625bbfd231e6ee9fcf8ca345ec?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>internetarchive</strong> <a href="http://blog.archive.org/2011/03/31/how-archive-org-items-are-structured/#comment-15749">May 4, 2011 at 12:29 am</a></span> Hi Andreas,</p>
+<p>I agree, that’s a great idea! We have a way to link collection pages to other related collections, but we currently don’t have a way to link items to one another (other than the user including an html link in their description, of course). As our collections grow, I think having this feature will become increasingly important – even just being able to link all the different editions/languages of a book together would be nice. I’ll make sure the team is aware of this request, though I can’t make any promises about delivery.</p>
+<p>Alexis</p></li>
+</ol></li>
+<li><p>Pingback: <a href="http://blog.archive.org/2012/04/26/downloading-in-bulk-using-wget/" class="url">Downloading in bulk using wget | Internet Archive Blogs</a></p></li>
+<li><p><span id="li-comment-305608"><img src="http://2.gravatar.com/avatar/bcb3171055f0de91c76ff75891e92871?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://2.gravatar.com/avatar/bcb3171055f0de91c76ff75891e92871?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>Jason Henderson</strong> <a href="http://blog.archive.org/2011/03/31/how-archive-org-items-are-structured/#comment-305608">December 19, 2013 at 9:52 pm</a></span> I am wondering: Is there a way to change out the main file (Say a PDF file) and then have Internet archive update the derivative files associated with that original file? I find I am needing to make corrections to previously created items, but in order to ensure the derivative files correspond I have had to completely delete the item and reupload.</p>
+<ol type="1">
+<li><p><span id="li-comment-305795"><img src="http://0.gravatar.com/avatar/9dbd31625bbfd231e6ee9fcf8ca345ec?s=44&amp;d=mm&amp;r=g" class="avatar avatar-44 photo" srcset="http://0.gravatar.com/avatar/9dbd31625bbfd231e6ee9fcf8ca345ec?s=88&amp;d=mm&amp;r=g 2x" width="44" height="44" /><strong>internetarchive</strong> <a href="http://blog.archive.org/2011/03/31/how-archive-org-items-are-structured/#comment-305795">December 20, 2013 at 10:48 pm</a></span> Hi Jason,</p>
+You can do this, but it’s a tad convoluted.
+<ol type="1">
+<li>Click “edit item” link on your item, click “change the files”<br />
+</li>
+<li>Remove the original file and all the derived files<br />
+</li>
+<li>Upload a replacement file and click “Update item”<br />
+</li>
+<li>On item page, click “edit item” &gt; “change the information” &gt; “item manager”<br />
+</li>
+<li>Click the “derive” button</li>
+</ol>
+<p>It will take a little while for the derive to finish, depending on the size of your original file, but that should do it!</p></li>
+</ol></li>
+</ol>
+<p>Comments are closed.</p>
+<p><a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fblog.archive.org%2F2011%2F03%2F31%2Fhow-archive-org-items-are-structured" class="shareitem"><img src="http://blog.archive.org/wp-content/plugins/archive-sharing-widget/public/images/facebook-icon.png" alt="Share to Facebook" /></a> <a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fblog.archive.org%2F2011%2F03%2F31%2Fhow-archive-org-items-are-structured&amp;via=internetarchive&amp;text=How+Archive.org+items+are+structured" class="shareitem"><img src="http://blog.archive.org/wp-content/plugins/archive-sharing-widget/public/images/twitter-icon.png" alt="Share to Twitter" /></a></p>
+<p>Search for:</p>
+<h3 id="recent-posts">Recent Posts</h3>
+<ul>
+<li><a href="http://blog.archive.org/2021/10/22/turns-out-its-not-the-technology-its-the-people/">Turns Out It’s Not the Technology, It’s the People</a></li>
+<li><a href="http://blog.archive.org/2021/10/21/laturbo-hypertextwishes/">LaTurbo Avedon’s Hypertext Wishes</a></li>
+<li><a href="http://blog.archive.org/2021/10/20/celebrating-kanta-kapoor-2021-internet-archive-hero-award-recipient/">Celebrating Kanta Kapoor: 2021 Internet Archive Hero Award Recipient</a></li>
+<li><a href="http://blog.archive.org/2021/10/20/celebrating-lisa-radha-weaver-2021-internet-archive-hero-award-recipient/">Celebrating Lisa Radha Weaver: 2021 Internet Archive Hero Award Recipient</a></li>
+<li><a href="http://blog.archive.org/2021/10/20/olia-lialina-gives-good-wishes-with-her-artwork-perpetual-calendar/">Olia Lialina gives good wishes with her artwork Perpetual Calendar</a></li>
+</ul>
+<h3 id="recent-comments">Recent Comments</h3>
+<ul>
+<li><span class="comment-author-link"><a href="https://gisomusic.com/" class="url">giso</a></span> on <a href="http://blog.archive.org/2021/10/22/turns-out-its-not-the-technology-its-the-people/#comment-412129">Turns Out It’s Not the Technology, It’s the People</a></li>
+<li><span class="comment-author-link"><a href="https://violinmusics.com/" class="url">آهنگ جدید</a></span> on <a href="http://blog.archive.org/2021/10/22/turns-out-its-not-the-technology-its-the-people/#comment-412119">Turns Out It’s Not the Technology, It’s the People</a></li>
+<li><span class="comment-author-link">Madhulika</span> on <a href="http://blog.archive.org/2021/10/20/celebrating-kanta-kapoor-2021-internet-archive-hero-award-recipient/#comment-412050">Celebrating Kanta Kapoor: 2021 Internet Archive Hero Award Recipient</a></li>
+<li><span class="comment-author-link"><a href="https://librarycognizance.blogspot.com/" class="url">Rangoli Awasthi</a></span> on <a href="http://blog.archive.org/2021/10/13/librarians-kanta-kapoor-and-lisa-radha-weaver-to-receive-internet-archive-hero-award-2021/#comment-412047">Librarians Kanta Kapoor and Lisa Radha Weaver to Receive 2021 Internet Archive Hero Award</a></li>
+<li><span class="comment-author-link">Kanta Kapoor</span> on <a href="http://blog.archive.org/2021/10/20/celebrating-kanta-kapoor-2021-internet-archive-hero-award-recipient/#comment-412032">Celebrating Kanta Kapoor: 2021 Internet Archive Hero Award Recipient</a></li>
+</ul>
+<h3 id="categories">Categories</h3>
+<ul>
+<li><a href="http://blog.archive.org/category/audio-archive/78rpm/">78rpm</a></li>
+<li><a href="http://blog.archive.org/category/announcements/">Announcements</a></li>
+<li><a href="http://blog.archive.org/category/archive-version-2/">Archive Version 2</a></li>
+<li><a href="http://blog.archive.org/category/archive-it/">Archive-It</a></li>
+<li><a href="http://blog.archive.org/category/audio-archive/">Audio Archive</a></li>
+<li><a href="http://blog.archive.org/category/books-archive/">Books Archive</a></li>
+<li><a href="http://blog.archive.org/category/cool-items/">Cool items</a></li>
+<li><a href="http://blog.archive.org/category/education-archive/">Education Archive</a></li>
+<li><a href="http://blog.archive.org/category/emulation/">Emulation</a></li>
+<li><a href="http://blog.archive.org/category/event/">Event</a></li>
+<li><a href="http://blog.archive.org/category/image-archive/">Image Archive</a></li>
+<li><a href="http://blog.archive.org/category/jobs/">Jobs</a></li>
+<li><a href="http://blog.archive.org/category/books-archive/lending-books/">Lending Books</a></li>
+<li><a href="http://blog.archive.org/category/live-music-archive-2/">Live Music Archive</a></li>
+<li><a href="http://blog.archive.org/category/movie-archive/">Movie Archive</a></li>
+<li><a href="http://blog.archive.org/category/music/">Music</a></li>
+<li><a href="http://blog.archive.org/category/news/">News</a></li>
+<li><a href="http://blog.archive.org/category/newsletter/">Newsletter</a></li>
+<li><a href="http://blog.archive.org/category/open-library/">Open Library</a></li>
+<li><a href="http://blog.archive.org/category/event/past-event/">Past Event</a></li>
+<li><a href="http://blog.archive.org/category/software-archive/">Software Archive</a></li>
+<li><a href="http://blog.archive.org/category/technical/">Technical</a></li>
+<li><a href="http://blog.archive.org/category/television-archive/">Television Archive</a></li>
+<li><a href="http://blog.archive.org/category/event/upcoming-event/">Upcoming Event</a></li>
+<li><a href="http://blog.archive.org/category/video-archive/">Video Archive</a></li>
+<li><a href="http://blog.archive.org/category/wayback-machine/">Wayback Machine – Web Archive</a></li>
+<li><a href="http://blog.archive.org/category/web-data-services/">Web &amp; Data Services</a></li>
+</ul>
+<h3 id="archives">Archives</h3>
+<p>Archives Select Month October 2021 September 2021 August 2021 July 2021 June 2021 May 2021 April 2021 March 2021 February 2021 January 2021 December 2020 November 2020 October 2020 September 2020 August 2020 July 2020 June 2020 May 2020 April 2020 March 2020 February 2020 January 2020 December 2019 November 2019 October 2019 September 2019 August 2019 July 2019 June 2019 May 2019 April 2019 March 2019 February 2019 January 2019 December 2018 November 2018 October 2018 September 2018 August 2018 July 2018 June 2018 May 2018 April 2018 March 2018 February 2018 January 2018 December 2017 November 2017 October 2017 September 2017 August 2017 July 2017 June 2017 May 2017 April 2017 March 2017 February 2017 January 2017 December 2016 November 2016 October 2016 September 2016 August 2016 July 2016 June 2016 May 2016 April 2016 March 2016 February 2016 January 2016 December 2015 November 2015 October 2015 September 2015 July 2015 June 2015 May 2015 April 2015 March 2015 February 2015 January 2015 December 2014 November 2014 October 2014 September 2014 August 2014 July 2014 June 2014 May 2014 April 2014 March 2014 February 2014 January 2014 December 2013 November 2013 October 2013 September 2013 August 2013 July 2013 June 2013 May 2013 April 2013 March 2013 February 2013 January 2013 December 2012 November 2012 October 2012 September 2012 August 2012 July 2012 June 2012 May 2012 April 2012 March 2012 February 2012 January 2012 December 2011 November 2011 October 2011 September 2011 August 2011 July 2011 June 2011 May 2011 April 2011 March 2011 February 2011 January 2011 December 2010 November 2010 October 2010 September 2010 August 2010 July 2010 June 2010 May 2010 April 2010 March 2010 February 2010 January 2010 December 2009 October 2009 September 2009 August 2009 July 2009 June 2009 May 2009 April 2009 March 2009 February 2009 January 2009 December 2008 November 2008 September 2008 August 2008 June 2008 May 2008 April 2008 March 2008 February 2008 January 2008 December 2007 October 2007 September 2007 August 2007 July 2007 June 2007 May 2007 April 2007 March 2007 February 2007 January 2007 December 2006 November 2006 October 2006 September 2006 August 2006 February 2006 November 2005 October 2005 September 2005 March 2005 February 2005 January 2005 December 2004 October 2004 March 2004</p>
+<h3 id="meta">Meta</h3>
+<ul>
+<li><a href="http://blog.archive.org/wp-login.php">Log in</a></li>
+<li><a href="http://blog.archive.org/feed/">Entries feed</a></li>
+<li><a href="http://blog.archive.org/comments/feed/">Comments feed</a></li>
+<li><a href="https://wordpress.org/">WordPress.org</a></li>
+</ul>
+<p><a href="https://wordpress.org/" class="imprint" title="Semantic Personal Publishing Platform">Proudly powered by WordPress</a></p>
+</body>
+</html>

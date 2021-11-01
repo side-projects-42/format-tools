@@ -1,0 +1,147 @@
+/*
+ Theme Name:   Twenty Twelve Child
+ Template:     twentytwelve
+ Description:  A child theme of the responsive Twenty Twelve theme, tailored to look like the existing blog.archive.org theme as of 2020-02-19.
+ Author:       Brenton Cheng
+ Version:      1.0.0
+*/
+body {
+  color: #333;
+}
+body.custom-font-enabled {
+  font-family: Georgia, sans-serif;
+}
+input[type="submit"], input[type="text"], select {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #000;
+}
+.site-header > hgroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.site-header .site-title a {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #000;
+}
+.site-description {
+  color: #666;
+  font-style: italic;
+}
+.site-header .header-image {
+  width: 100%;
+  display: block;
+  margin-top: 1rem;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.main-navigation {
+  margin-top: 0;
+  background-color: #000;
+}
+.main-navigation ul.nav-menu {
+  border: 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.main-navigation .nav-menu li {
+  margin-right: 1.5rem;
+}
+.main-navigation .nav-menu a {
+  text-transform: none;
+  color: #aaa;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+.main-navigation .nav-menu a:hover {
+  color: #fff;
+  background-color: #444;
+}
+.main-navigation .nav-menu .current-menu-item a {
+  color: #fff;
+}
+.archive-title, .page-title, .widget-title, .entry-content th, .comment-content th {
+  text-transform: none;
+}
+.archive-title {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #000;
+}
+.archive-title span {
+  font-weight: normal;
+  font-style: italic;
+}
+.entry-title, .widget-title, .comments-link, .entry-meta {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #000;
+}
+.widget-title {
+  font-size: 1.17rem;
+}
+.widget-area .widget {
+  margin-bottom: 1rem;
+}
+.widget-area .widget h3 {
+  margin-bottom: 0;
+}
+.widget-area .widget ul {
+  list-style-type: square;
+}
+.widget-area .widget a {
+  color: #06c;
+}
+.widget-area .widget a:visited {
+  color: #743399;
+}
+.site-content article {
+  margin-bottom: 3rem;
+}
+.entry-header .entry-title {
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+}
+.entry-header .entry-title a {
+  color: #000;
+  font-weight: bold;
+}
+.entry-header .entry-byline, .entry-header .entry-byline a {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 0.9rem;
+  color: #666;
+}
+.entry-content a, .comment-content a {
+  color: #06c;
+}
+.entry-content a:visited, .comment-content a:visited {
+  color: #743399;
+}
+.comments-title {
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+.comments-area article {
+  margin: 1.5rem;
+  padding-bottom: 0;
+}
+.comments-area article header {
+  margin: 0 0 1rem;
+}
+.comments-area article header cite b {
+  font-weight: bold;
+}
+.comments-area article header cite a {
+  color: #06c;
+  text-decoration: underline;
+}
+.comments-area article header time {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+.nav-previous, .nav-next {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+.site-info {
+  text-align: right;
+  font-style: italic;
+}

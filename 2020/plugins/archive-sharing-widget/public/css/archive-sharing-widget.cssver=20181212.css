@@ -1,0 +1,6 @@
+.archive-sharing-widget > .shareitem {
+  display: inline-block;
+}
+.archive-sharing-widget > .shareitem + .shareitem {
+  margin-left: 8px;
+}
